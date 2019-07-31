@@ -8,6 +8,7 @@
 
 <div align="center">
 React-based organizational structure component for organizing containers and vtc's. Provides users with a visual of their network and allows them to organize it to their needs.
+  DEMO: https://www.youtube.com/watch?v=De4pSY9tKsE
 </div>
 
 ## 🍭 Characteristics
