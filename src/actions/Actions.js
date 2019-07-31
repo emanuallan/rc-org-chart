@@ -2,9 +2,16 @@ import { FETCH_VTCS, NEW_VTC, DELETE_VTC, EDIT_VTC, UPDATE_VTC, SELECT_VTC } fro
 import { FETCH_CONTAINER_TYPE, FETCH_CONTAINERS, NEW_CONTAINER, DELETE_CONTAINER, EDIT_CONTAINER, UPDATE_CONTAINER, SELECT_CONTAINER } from './types';
 import { message } from 'antd';
 
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNTY0NTExMDY1LCJwcml2IjoiZnVsbCIsInJhbmQiOiI2dU1qanFmQyIsInVzZXJfbmFtZSI6ImFkbWluIn0.SlyGJxJSd3zFuERhYGDEmxHZe_6_tWtOPzwqNzXJDSc";
+/* -------------------------------------------------------------------------- */
+/*                             IMPORTANT CONSTANTS                            */
+/* -------------------------------------------------------------------------- */
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNTY0NjEwMTYyLCJwcml2IjoiZnVsbCIsInJhbmQiOiJYcDh2dFhvMiIsInVzZXJfbmFtZSI6ImFkbWluIn0.sAYte2lY1ddSAHGbPnQUIPjR0h-NFgrQVduk5EyYTtw";
 const url = "localhost:3004";
 
+
+/* -------------------------------------------------------------------------- */
+/*                              METHODS FOR VTC'S                             */
+/* -------------------------------------------------------------------------- */
 export const fetchVTCS = () => dispatch => {
     fetch('https://' + url + '/api/vtcs?offset=0&limit=1000&fields=*&filter=&related=*', {
         method: 'GET',
@@ -60,6 +67,10 @@ export const editVTC = (requestData) => dispatch => {
         });
 };
 
+// EDIT AND UPDATE DO THE SAME THING, HOWEVER WHEN EDITTING A NODE I WOULD USE EDIT
+// ON THE OTHER HAND, WHEN UPDATING PARENTS (DRAGGING AND DROPPING OR DELETE NODE ALGORITHMS) I WOULD
+// USE UPDATE
+
 export const updateVTC = (requestData) => dispatch => {
     fetch('https://' + url + '/api/vtcs?fields=*&related=*', {
         method: 'PUT',
@@ -113,6 +124,10 @@ export const selectVTC = (selected_vtc_id) => dispatch => {
         });
 };
 
+
+/* -------------------------------------------------------------------------- */
+/*                           METHODS FOR CONTAINERS                           */
+/* -------------------------------------------------------------------------- */
 export const fetchContainers = () => dispatch => {
     fetch('https://' + url + '/api/containers?offset=0&limit=1000&fields=*&filter=', {
         method: 'GET',
@@ -185,6 +200,10 @@ export const editContainer = (requestData) => dispatch => {
         });
 };
 
+// EDIT AND UPDATE DO THE SAME THING, HOWEVER WHEN EDITTING A NODE I WOULD USE EDIT
+// ON THE OTHER HAND, WHEN UPDATING PARENTS (DRAGGING AND DROPPING OR DELETE NODE ALGORITHMS) I WOULD
+// USE UPDATE
+
 export const updateContainer = (requestData) => dispatch => {
     fetch('https://' + url + '/api/containers?fields=*', {
         method: 'PUT',
@@ -237,64 +256,3 @@ export const selectContainer = (selID) => dispatch => {
             message.error("Container not selected. " + error.toString());
         });
 };
-
-  // recursiveOnDelete = (container_id, current) => {
-  //   for (var i = 0; i < current.children.length; i++) {
-  //     if (current.children[i].id == container_id) {
-  //       var deletedContainer = current.children[i];
-  //       current.children.splice(i, 1);
-  //       return deletedContainer;
-  //     }
-  //   }
-  //   for (var i = 0; i < current.children.length; i++) {
-  //     if (current.children[i].type !== "vtc") {
-  //       this.recursiveOnDelete(container_id, current.children[i]);
-  //     }
-  //   }
-  // }
-
-
-  // onDeleteContainer = (container_id) => {
-  //   this.props.deleteContainer(container_id)
-  //   this.recursiveOnDelete(container_id, this.state.data[0]);
-  //   this.setState({ containers: this.state.containers });
-  // }
-
-  // onDeleteVTC = (vtc_id) => {
-  //   this.props.deleteVTC(vtc_id);
-  //   this.recursiveOnDelete(vtc_id, this.state.data[0]);
-  //   this.setState({ vtcs: this.state.vtcs });
-  // }
-
-  //method that deletes a node and all its children
-  // deleteAll = (current, parent) => {
-  //   console.log("current: ", current, " parent: ", parent)
-  //   if (current.type !== "vtc" && current.children.length > 0) {
-  //     console.log("RECURSIVE CALL OPTION + CONTAINER HAS CHILDREN")
-  //     for (var i = 0; i < current.children.length; i++) {
-  //       this.deleteAll(current.children[i], current);
-  //     }
-  //     this.onDeleteContainer(current.id)
-  //   } else {
-  //     console.log("2")
-  //     if (current.type == "vtc") {
-  //       console.log("DELETE VTC OPTION")
-  //       console.log("onDeleteVTC: " + current.id)
-  //       this.onDeleteVTC(current.id);
-  //       for (var i = 0; i < parent.children.length; i++) {
-  //         if (parent.children[i].id == current.id) {
-  //           parent.children.splice(i, 1);
-  //         }
-  //       }
-  //     } else {
-  //       console.log("CONTAINER DOESNT HAVE CHILDREN OPTION")
-  //       this.props.deleteContainer(current.id);
-  //       console.log("PARENT: ", parent)
-  //       for (var i = 0; i < parent.children.length; i++) {
-  //         if (parent.children[i].id == current.id) {
-  //           parent.children.splice(i, 1);
-  //         }
-  //       }
-  //     }
-  //   }
-  // }

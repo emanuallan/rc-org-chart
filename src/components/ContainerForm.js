@@ -1,3 +1,5 @@
+// Refer to VTC form for more info (since they're practically the same in how they work)
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,7 +19,6 @@ class ContainerForm extends Component {
 
         this.onChangeInt = this.onChangeInt.bind(this);
         this.onChangeString = this.onChangeString.bind(this);
-        this.onChangeNic = this.onChangeNic.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -47,10 +48,6 @@ class ContainerForm extends Component {
         } else {
             this.setState({ [e.target.id]: val });
         }
-    }
-
-    onChangeNic(e) {
-        this.setState({ customer_id: Number(e) });
     }
 
     onReset = () => {

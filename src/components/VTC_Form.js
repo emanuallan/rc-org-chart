@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createVTC, editVTC } from '../actions/Actions';
 import { Input, Tooltip, Icon, Button, Radio } from 'antd';
-import { Typography, Row, Col } from 'antd';
-
-const { Title } = Typography;
+import { Row, Col } from 'antd';
 
 class VTC_Form extends Component {
     constructor(props) {
@@ -30,35 +28,19 @@ class VTC_Form extends Component {
 
         this.onChangeInt = this.onChangeInt.bind(this);
         this.onChangeString = this.onChangeString.bind(this);
-        this.onChangeNic = this.onChangeNic.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedVTC) {
-            if (!(typeof nextProps.selectedVTC.vtc_id == "undefined") && this.props.edittingVTC) {
-                this.setState({
-                    vtc_id: nextProps.selectedVTC.vtc_id,
-                    common_name: nextProps.selectedVTC.common_name,
-                    whitelist: nextProps.selectedVTC.whitelist,
-                    user_auth: nextProps.selectedVTC.user_auth,
-                    reg_required: nextProps.selectedVTC.reg_required,
-                    netflow_index: nextProps.selectedVTC.netflow_index,
-                    home_dps: nextProps.selectedVTC.home_dps,
-                    nic_rl_mbps: nextProps.selectedVTC.nic_rl_mbps,
-                    exclude_tcp_ports: nextProps.selectedVTC.exclude_tcp_ports,
-                    exclude_udp_ports: nextProps.selectedVTC.exclude_udp_ports,
-                    pm_enable: nextProps.selectedVTC.pm_enable
-                })
-            }
-        }
-    }
+    /* -------------------------------------------------------------------------- */
+    /*                               HELPER METHODS                               */
+    /* -------------------------------------------------------------------------- */
 
-
+    //For String inputs
     onChangeString(e) {
         this.setState({ [e.target.id]: e.target.value });
     }
 
+    //For number inputs
     onChangeInt(e) {
         let val = Number(e.target.value);
         if (Number.isNaN(val)) {
@@ -68,10 +50,7 @@ class VTC_Form extends Component {
         }
     }
 
-    onChangeNic(e) {
-        this.setState({ nic_rl_mbps: Number(e) });
-    }
-
+    //Resets form to blanks
     onReset = () => {
         this.setState({
             vtc_id: "",
@@ -88,10 +67,12 @@ class VTC_Form extends Component {
         });
     }
 
+    //handler for radio buttons
     onChangeRadio = name => ({ target: { value } }) => {
         this.setState({ [name]: value })
     }
 
+    //handler for submissions 
     onSubmit(e) {
         e.preventDefault();
 
@@ -134,6 +115,33 @@ class VTC_Form extends Component {
         this.onReset();
     }
 
+    /* -------------------------------------------------------------------------- */
+    /* -------------------------------------------------------------------------- */
+
+
+    componentWillReceiveProps(nextProps) {
+        //this component receives props because when you select a VTC (or container) for editting, the API is called 
+        // and returns the properties of the selected VTC
+
+        if (nextProps.selectedVTC) {
+            if (!(typeof nextProps.selectedVTC.vtc_id == "undefined") && this.props.edittingVTC) {
+                this.setState({
+                    vtc_id: nextProps.selectedVTC.vtc_id,
+                    common_name: nextProps.selectedVTC.common_name,
+                    whitelist: nextProps.selectedVTC.whitelist,
+                    user_auth: nextProps.selectedVTC.user_auth,
+                    reg_required: nextProps.selectedVTC.reg_required,
+                    netflow_index: nextProps.selectedVTC.netflow_index,
+                    home_dps: nextProps.selectedVTC.home_dps,
+                    nic_rl_mbps: nextProps.selectedVTC.nic_rl_mbps,
+                    exclude_tcp_ports: nextProps.selectedVTC.exclude_tcp_ports,
+                    exclude_udp_ports: nextProps.selectedVTC.exclude_udp_ports,
+                    pm_enable: nextProps.selectedVTC.pm_enable
+                })
+            }
+        }
+    }
+
     render() {
         const vtc_id_input_enabled = (
             <Input
@@ -172,6 +180,7 @@ class VTC_Form extends Component {
 
         if (this.props.edittingVTC) {
             vtc_id_input = vtc_id_input_disabled;
+            //disables vtc id input section if in editting mode
         }
 
         return (
@@ -318,11 +327,9 @@ VTC_Form.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    vtcs: state.nodes.vtcs, //from index.js in reducers
+    vtcs: state.nodes.vtcs, //from index.js in ../reducers
     selectedVTC: state.nodes.sel_vtc
 })
 
 
 export default connect(mapStateToProps, { createVTC, editVTC })(VTC_Form);
-
-//export default connect(null, { createVTC })(VTC_Form);

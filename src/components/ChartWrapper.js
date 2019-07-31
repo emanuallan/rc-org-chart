@@ -1,4 +1,4 @@
-// component came with library
+/* ------------------ THIS COMPONENT CAME WITH THE LIBRARY ------------------ */
 
 import React from 'react'
 

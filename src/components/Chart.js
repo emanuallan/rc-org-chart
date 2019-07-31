@@ -1,3 +1,6 @@
+
+/* ------------------ THIS COMPONENT CAME WITH THE LIBRARY ------------------ */
+
 import React from 'react'
 import Node from './Node'
 import Context from './Context'

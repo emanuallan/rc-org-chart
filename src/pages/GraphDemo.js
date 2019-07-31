@@ -1,3 +1,11 @@
+// It was awesome working with ya'll! I learned an incrediable amount
+// during this internship and feel way better about
+// my React and CRUD application development skills.
+// I appreciate yall's attention and I am super happy I got to work on this project. 
+// I know this is just a start but I'm sure ya'll will do great things with it!
+// Thanks once again!
+// -ALLAN
+
 import React, { Component, useState } from 'react';
 import { Avatar, Icon, Menu, Dropdown, notification, Modal, Button } from 'antd';
 import PropTypes from 'prop-types';
@@ -95,12 +103,12 @@ class GraphDemo extends Component {
       }
     }
 
-    // this.getContainerObjectWithID = this.getContainerObjectWithID.bind(this);
-    // this.onDeleteContainer = this.onDeleteContainer.bind(this);
-    // this.onDeleteVTC = this.onDeleteVTC.bind(this);
-    // this.toggleChildModal = this.toggleChildModal.bind(this);
-    // this.toggleEditContainerModal = this.toggleEditContainerModal.bind(this);
-    // this.toggleEditVTCModal = this.toggleEditVTCModal.bind(this);
+    this.getContainerObjectWithID = this.getContainerObjectWithID.bind(this);
+    this.onDeleteContainer = this.onDeleteContainer.bind(this);
+    this.onDeleteVTC = this.onDeleteVTC.bind(this);
+    this.toggleChildModal = this.toggleChildModal.bind(this);
+    this.toggleEditContainerModal = this.toggleEditContainerModal.bind(this);
+    this.toggleEditVTCModal = this.toggleEditVTCModal.bind(this);
   }
 
   /* -------------------------------------------------------------------------- */

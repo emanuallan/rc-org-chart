@@ -1,4 +1,6 @@
-// Component came with library
+/* ------------------ THIS COMPONENT CAME WITH THE LIBRARY ------------------ */
+// THIS FILE TAKES CARE OF THE DRAGGING AND DROPPING => GOTO: sureDrop Method 
+// THAT METHOD IS WHERE I ADDED THE LOGIC FOR UPDATING THE NODE'S PARENTS
 
 import React from 'react';
 import cls from 'classnames';
@@ -76,6 +78,7 @@ class Node extends React.PureComponent {
     }
   }
 
+  //DRAG & DROP CODE
   sureDrop = (dropProps, dragProps) => {
     const { moveNode, getNodeId } = this.context;
     const { id: dropId } = dropProps;
@@ -85,7 +88,7 @@ class Node extends React.PureComponent {
     getNodeId('draggingNodeProps', null);
     getNodeId('didMountNodeId', dragId);
     moveNode(dropId, dragId);
-    //DragProps = Dragged Node (child) DropProps = Drop target (parent)
+    //DragProps = Dragged Node (child) // DropProps = Drop target (parent)
     if (dragProps.type !== "vtc") {
       const update_parent = {
         id: dragProps.id,

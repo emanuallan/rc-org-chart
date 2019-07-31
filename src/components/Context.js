@@ -1,3 +1,5 @@
+/* ------------------ THIS COMPONENT CAME WITH THE LIBRARY ------------------ */
+
 import React from 'react'
 
 const Context = React.createContext({})

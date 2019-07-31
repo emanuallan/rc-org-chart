@@ -1,4 +1,4 @@
-// component came with library
+/* ------------------ THIS COMPONENT CAME WITH THE LIBRARY ------------------ */
 
 import React, { PureComponent } from 'react'
 
@@ -116,7 +116,7 @@ const getNode = (data, targetId, isDelete) => {
   }
 }
 
-// RIGHT HERE
+
 const setIdentify = (data, targetId, droppable) => {
   data.forEach(item => {
     const { id, children = [] } = item

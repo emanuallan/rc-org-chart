@@ -1,3 +1,5 @@
+// This is the modal that appears when adding a new Child node
+
 import React, { Component } from 'react';
 import { Avatar, Icon, Menu, Dropdown, notification, Modal, Button } from 'antd';
 import { Tabs, Radio } from 'antd';
